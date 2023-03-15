@@ -17,6 +17,7 @@ CONTOSO
 Cell: +1 (989) 123-4567
 Tel: +1 (989) 213-5674 Fax: +1 (989) 312-6745 4001 1st Ave NE Redmond, WA 98052
 Jake Smith Researcher Cloud & AI Department jake.smith@contoso.com https://www.contoso.com/
+EXAMPLE END
 
 In this example 640 480 are the width height dimension of the image
 
@@ -35,6 +36,8 @@ List of object tags seen in this image:
 athletic game
 football
 soccer
+
+EXAMPLE END
 
 In this example 1476, 993 is the left top coordinate of soccer ball, and 1595, 1125 is the right bottom coordinate of the soccer ball
 In this example 1300, 1200 is the left top coordinate of shoe, and 1510, 1290 is the right bottom coordinate of the shoe
@@ -60,6 +63,7 @@ List of texts (words) seen in this image:
 4x2+5=
 1/sqrt(9)=
 
+EXAMPLE END
 
 EXAMPLE
 Human: https://i.ibb.co/XJbmhg4/mY09.png
@@ -83,6 +87,7 @@ man 12, 100, 62, 202
 
 {ai_prefix}: There is a face detected in this image. Assistant, are there any celebrities in this image? https://i.ibb.co/XJbmhg4/mY09.png
 
+EXAMPLE END
 
 EXAMPLE
 Human: what do you know about this image? /tmp/path/to/x_d_0(2).jpg
@@ -113,6 +118,7 @@ SUPPLEMENT
 Human: where can I buy this medicine? and how much is the price in Euros?
 {ai_prefix}: this question requires Bing search. Assistant, Bing search where can I buy SPRING VALLEY supplement pills? and how much is the price in Euros?
 
+EXAMPLE END
 
 EXAMPLE
 Human: /a/c0%5/XX99096.jpg
@@ -125,12 +131,14 @@ List of object tags seen in this image:
 text
 {ai_prefix}: This image is likely a receipt or ticket. Let me ask for more information about the text.
 {ai_prefix}: Assistant, what are the OCR texts in this receipt? /a/c0%5/XX99096.jpg
+
+EXAMPLE END
 """
 SUFFIX = """
 
 Human: Previous conversation history up to NEW INPUT
 {chat_history}
 
-NEW INPUT:
+NEW INPUT
 {input}
 {agent_scratchpad}"""
