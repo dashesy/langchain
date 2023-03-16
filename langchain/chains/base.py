@@ -214,7 +214,9 @@ class Chain(BaseModel, ABC):
                     f"multiple inputs, please call it by passing in a dictionary, "
                     "eg `chain({'foo': 1, 'bar': 2})`"
                 )
-            inputs = {list(_input_keys)[0]: inputs}
+            inputs = {list(_input_keys)[0]: "Human: " + inputs}
+        else:
+            inputs["input"] = "Human: " + inputs["input"]
         if self.memory is not None:
             external_context = self.memory.load_memory_variables(inputs)
             inputs = dict(inputs, **external_context)
@@ -236,10 +238,9 @@ class Chain(BaseModel, ABC):
             if args and not kwargs:
                 if len(args) != 1:
                     raise ValueError("`run` supports only one positional argument.")
-                outputs = self("Human: " + args[0])
-                # outputs = self(args[0])
-            # if kwargs and not args:
-            #     outputs = self(kwargs)
+                outputs = self(args[0])
+            if kwargs and not args:
+                outputs = self(kwargs)
             intermediate = outputs.get("intermediate_steps") or []
             conversation = []
             for action, action_output in intermediate:
