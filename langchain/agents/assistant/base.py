@@ -120,7 +120,7 @@ class AssistantAgent(Agent):
                 action = "Celebrity Understanding"
             elif " landmark" in llm_output:
                 action = "Bing Search"
-            elif " brand" in cmd:
+            elif " brand" in llm_output:
                 action = "Bing Search"
             else:
                 action = "Image Understanding"
