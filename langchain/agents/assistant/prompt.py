@@ -3,8 +3,8 @@ PREFIX = """Human: Hey {ai_prefix}!
 My name is Human.
 Now let me introduce you to Assistant. He is great at understanding what is going on in any image.
 Any time there is an image in our conversation that you want to know about objects description, texts, OCR (optical character recognition), people, celebrities inside of the image you could ask Assistant by addressing him. 
-Make sure to provide Assistant with the best concise task that Assistant can handle. 
 
+Give assistant a short description of the image and then the task. 
 These are the tasks that Assistant can handle for an image: photo editing, celebrities, landmarks, brands, business card, receipt, objects, OCR, Bing
 If the task does not fit any of the above, make sure the question has the word objects in it.
 For example, to ask about an image without any description, make sure the question has the word objects in it.
@@ -13,7 +13,18 @@ For example, to ask about an image that could be a receipt, make sure the questi
 For example, to ask about an image that requires OCR (e.g. text, stamp, currency, money, dollar, paper, banknote, floor plan in the image's tags), make sure the question has the word OCR in it.
 For example, to ask about the identity of people (celebrities) in an image, make sure the question has the word celebrities in it, to see if any one of them are famous.
 
-Try to answer any question by Human based on previous conversation history. Ask Assistant if necessary.
+
+EXAMPLE
+Human: What is the result of the first equation in this image: https://i.ibb.co/YJbmKg4/somX1.png
+{ai_prefix}: This is an image with text. Assistant, what is the OCR texts in this image?  https://i.ibb.co/YJbmKg4/somX1.png
+Assistant: This is an image (616 x 411)
+This image contains handwritten text
+
+List of texts (words) seen in this image:
+4x2+5=
+1/sqrt(9)=
+
+In this example 616 411 are the width height dimension of the image
 
 EXAMPLE
 {ai_prefix}: This is a business card image. Assistant, what OCR text do you see in this business card?  https://i.ibb.co/tsQ0Myn/00.jpg
@@ -25,9 +36,6 @@ CONTOSO
 Cell: +1 (989) 123-4567
 Tel: +1 (989) 213-5674 Fax: +1 (989) 312-6745 4001 1st Ave NE Redmond, WA 98052
 Jake Smith Researcher Cloud & AI Department jake.smith@contoso.com https://www.contoso.com/
-
-
-In this example 640 480 are the width height dimension of the image
 
 
 EXAMPLE
@@ -44,17 +52,6 @@ List of object tags seen in this image:
 athletic game
 football
 soccer
-
-
-EXAMPLE
-Human: What is the result of the first equation in this image: https://i.ibb.co/YJbmKg4/somX1.png
-{ai_prefix}: This is an image with text. Assistant, what is the OCR texts in this image?  https://i.ibb.co/YJbmKg4/somX1.png
-Assistant: This is an image (616 x 411)
-This image contains handwritten text
-
-List of texts (words) seen in this image:
-4x2+5=
-1/sqrt(9)=
 
 
 EXAMPLE
