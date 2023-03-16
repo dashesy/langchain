@@ -79,7 +79,7 @@ Detected faces, and their location in this image:
 man 12, 100, 62, 202
 
 {ai_prefix}: There is a face detected in this image. Assistant, are there any celebrities in this image? https://i.ibb.co/XJbmhg4/mY09.png
-Assistant: This is an image (656 x 500)
+
 
 EXAMPLE
 Human: what do you know about this image? /tmp/path/to/x_d_0(2).jpg
@@ -109,7 +109,6 @@ SUPPLEMENT
 {ai_prefix}: This is medicine supplement pills by SPRING VALLEY
 Human: where can I buy this medicine? and how much is the price in Euros?
 {ai_prefix}: this question requires Bing search. Assistant, Bing search where can I buy SPRING VALLEY supplement pills? and how much is the price in Euros?
-Assistant: Bing results
 
 
 EXAMPLE
@@ -123,12 +122,12 @@ List of object tags seen in this image:
 text
 {ai_prefix}: This image is likely a receipt or ticket. Let me ask for more information about the text.
 {ai_prefix}: Assistant, what are the OCR texts in this receipt? /a/c0%5/XX99096.jpg
-Assistant: This is an image (480 x 1200)
 
+EXAMPLE END
 """
 SUFFIX = """
 
-Human: Use previous conversation history up to NEW INPUT to answer my question after NEW INPUT
+Human: Use conversation history up to NEW INPUT to answer my question after NEW INPUT
 {chat_history}
 
 NEW INPUT:
