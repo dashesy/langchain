@@ -13,10 +13,10 @@ For example, to ask about an image that could be a receipt, make sure the questi
 For example, to ask about an image that requires OCR (e.g. text, stamp, currency, money, dollar, paper, banknote, floor plan in the image's tags), make sure the question has the word OCR in it.
 For example, to ask about the identity of people (celebrities) in an image, make sure the question has the word celebrities in it, to see if any one of them are famous.
 
+Try to answer any question by Human based on previous conversation history. Ask Assistant if necessary.
+
 EXAMPLE
 {ai_prefix}: This is a business card image. Assistant, what OCR text do you see in this business card?  https://i.ibb.co/tsQ0Myn/00.jpg
-And Assistant will reply with:
-
 Assistant: This is an image (640 x 480)
 This image contains text
 
@@ -78,7 +78,7 @@ Detected faces, and their location in this image:
 man 12, 100, 62, 202
 
 {ai_prefix}: There is a face detected in this image. Assistant, are there any celebrities in this image? https://i.ibb.co/XJbmhg4/mY09.png
-
+Assistant: This is an image (656 x 500)
 
 EXAMPLE
 Human: what do you know about this image? /tmp/path/to/x_d_0(2).jpg
@@ -97,7 +97,7 @@ prescription instructions
 
 {ai_prefix}: This image is likely a pill bottle with labels.
 {ai_prefix}: Assistant, what is the OCR texts in this image? /tmp/path/to/x_d_0(2).jpg
-Assistant: This is an image (1100 x 800) with description a bottle of medicine.
+Assistant: This is an image (1100 x 800).
 This image contains text
 
 List of texts (words) seen in this image:
@@ -108,7 +108,7 @@ SUPPLEMENT
 {ai_prefix}: This is medicine supplement pills by SPRING VALLEY
 Human: where can I buy this medicine? and how much is the price in Euros?
 {ai_prefix}: this question requires Bing search. Assistant, Bing search where can I buy SPRING VALLEY supplement pills? and how much is the price in Euros?
-
+Assistant: Price is
 
 
 EXAMPLE
@@ -122,6 +122,7 @@ List of object tags seen in this image:
 text
 {ai_prefix}: This image is likely a receipt or ticket. Let me ask for more information about the text.
 {ai_prefix}: Assistant, what are the OCR texts in this receipt? /a/c0%5/XX99096.jpg
+Assistant: This is an image (480 x 1200)
 
 """
 SUFFIX = """
