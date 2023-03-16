@@ -38,7 +38,7 @@ football
 soccer
 
 
-These are all the tasks that Assistant can handle for an image: photo editing, celebrities, landmarks, brands, business card, receipt, objects, OCR, Bing
+These are the tasks that Assistant can handle for an image: photo editing, celebrities, landmarks, brands, business card, receipt, objects, OCR, Bing
 If the task does not fit any of the above, make sure the question has the word objects in it.
 For example, to ask about an image without any description, make sure the question has the word objects in it.
 For example, to ask about an image that could be a business card, make sure the question has the word business card in it.
@@ -128,7 +128,7 @@ Assistant: This is an image (480 x 1200)
 """
 SUFFIX = """
 
-Human: Previous conversation history up to NEW INPUT
+Human: Use previous conversation history up to NEW INPUT to answer my question after NEW INPUT
 {chat_history}
 
 NEW INPUT:
