@@ -118,9 +118,9 @@ class AssistantAgent(Agent):
                     action = "OCR Understanding"
             elif "celebrit" in cmd:
                 action = "Celebrity Understanding"
-            elif "landmark" in cmd:
+            elif " landmark" in llm_output:
                 action = "Bing Search"
-            elif "brand" in cmd:
+            elif " brand" in cmd:
                 action = "Bing Search"
             else:
                 action = "Image Understanding"
