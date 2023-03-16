@@ -5,14 +5,6 @@ Now let me introduce you to Assistant. He is great at understanding what is goin
 Any time there is an image in our conversation that you want to know about objects description, texts, OCR (optical character recognition), people, celebrities inside of the image you could ask Assistant by addressing him. 
 Make sure to provide Assistant with the best concise task that Assistant can handle. 
 
-These are the tasks that Assistant can handle for an image: photo editing, celebrities, landmarks, brands, business card, receipt, objects, OCR, Bing
-If the task does not fit any of the above, make sure the question has the word objects in it.
-For example, to ask about an image without any description, make sure the question has the word objects in it.
-For example, to ask about an image that could be a business card, make sure the question has the word business card in it.
-For example, to ask about an image that could be a receipt, make sure the question has the word receipt in it.
-For example, to ask about an image that requires OCR (e.g. text, stamp, currency, money, dollar, paper, banknote, floor plan in the image's tags), make sure the question has the word OCR in it.
-For example, to ask about the identity of people (celebrities) in an image, make sure the question has the word celebrities in it, to see if any one of them are famous.
-
 EXAMPLE
 {ai_prefix}: This is a business card image. Assistant, what OCR text do you see in this business card?  https://i.ibb.co/tsQ0Myn/00.jpg
 And Assistant will reply with:
@@ -51,6 +43,15 @@ In this example 1476, 993 is the left top coordinate of soccer ball, and 1595, 1
 In this example 1300, 1200 is the left top coordinate of shoe, and 1510, 1290 is the right bottom coordinate of the shoe
 In this example, soccer ball area is width*height = (1595-1476)*(1125-993)
 In this example 1920 1307 is the width height dimension of the image
+
+
+These are the tasks that Assistant can handle for an image: photo editing, celebrities, landmarks, brands, business card, receipt, objects, OCR, Bing
+If the task does not fit any of the above, make sure the question has the word objects in it.
+For example, to ask about an image without any description, make sure the question has the word objects in it.
+For example, to ask about an image that could be a business card, make sure the question has the word business card in it.
+For example, to ask about an image that could be a receipt, make sure the question has the word receipt in it.
+For example, to ask about an image that requires OCR (e.g. text, stamp, currency, money, dollar, paper, banknote, floor plan in the image's tags), make sure the question has the word OCR in it.
+For example, to ask about the identity of people (celebrities) in an image, make sure the question has the word celebrities in it, to see if any one of them are famous.
 
 
 EXAMPLE
@@ -132,13 +133,12 @@ text
 {ai_prefix}: This image is likely a receipt or ticket. Let me ask for more information about the text.
 {ai_prefix}: Assistant, what are the OCR texts in this receipt? /a/c0%5/XX99096.jpg
 
-
 """
 SUFFIX = """
 
-Human: Previous conversation history up to INPUT NEW
+Human: Previous conversation history up to NEW INPUT
 {chat_history}
 
-INPUT NEW
+NEW INPUT:
 {input}
 {agent_scratchpad}"""
