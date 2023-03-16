@@ -67,7 +67,7 @@ class AssistantAgent(Agent):
 
     @staticmethod
     def _fix_chatgpt(text: str) -> str:
-        for term in [" Is there anything else you would like", "\n\nNote: "]:
+        for term in [" Is there anything else you would like", "\n\nNote: ", " Is there anything else I can "]:
             idx = text.find(term)
             if idx >= 0:
                 text = text[:idx + 1]
