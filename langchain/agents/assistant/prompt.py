@@ -136,9 +136,7 @@ EXAMPLE END
 """
 SUFFIX = """
 
-Human: Previous conversation history up to NEW INPUT
 {chat_history}
 
-NEW INPUT
 {input}
 {agent_scratchpad}"""

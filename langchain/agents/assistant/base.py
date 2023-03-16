@@ -66,28 +66,18 @@ class AssistantAgent(Agent):
         return self.ai_prefix
 
     @staticmethod
-    def _remove_after(line: str) -> bool:
-        if "anything else I can help" in line:
-            return True
-        if "anything else you would like" in line:
-            return True
-        if "Previous conversation history" in line:
-            return True
-
-        return False
-    
-    @staticmethod
     def _fix_chatgpt(text: str) -> str:
-        idx = text.find("\n\nNote: ")
-        if idx >= 0:
-            text = text[:idx + 1]
-        # Remove redundant questions, to keep history shorter
+        for term in [" Is there anything else you would like", "\n\nNote: "]:
+            idx = text.find(term)
+            if idx >= 0:
+                text = text[:idx + 1]
         lines = text.split("\n")
         new_lines = []
         for l in lines:
-            # do not keep anthing afterwards
-            if __class__._remove_after(l):
-                break
+            if l.startswith("Human: "):
+                continue
+            if l == "NEW INPUT":
+                continue
             new_lines.append(l)
         text = "\n".join(new_lines)
         return text

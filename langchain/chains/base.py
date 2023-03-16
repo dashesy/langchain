@@ -236,9 +236,9 @@ class Chain(BaseModel, ABC):
             if args and not kwargs:
                 if len(args) != 1:
                     raise ValueError("`run` supports only one positional argument.")
-                outputs = self(args[0])
-            if kwargs and not args:
-                outputs = self(kwargs)
+                outputs = self("Human: " + args[0])
+            # if kwargs and not args:
+            #     outputs = self(kwargs)
             intermediate = outputs.get("intermediate_steps") or []
             conversation = []
             for action, action_output in intermediate:

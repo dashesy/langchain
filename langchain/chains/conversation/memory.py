@@ -115,9 +115,10 @@ class ConversationBufferMemory(Memory, BaseModel):
         else:
             output_key = self.output_key
         new_input = inputs[prompt_input_key]
-        # if new_input.startswith("http://0.0.0.0"):
-        #     self.clear()
-        human = f"{self.human_prefix}: " + new_input
+        if new_input.startswith(f"{self.human_prefix}: "):
+            human = new_input
+        else:
+            human = f"{self.human_prefix}: " + new_input
         ai = f"{self.ai_prefix}: " + outputs[output_key]
         assistant = ""
         intermediate = outputs.get(self.output_intermediate) or []
