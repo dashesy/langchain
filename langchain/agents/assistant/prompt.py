@@ -132,11 +132,13 @@ text
 {ai_prefix}: This image is likely a receipt or ticket. Let me ask for more information about the text.
 {ai_prefix}: Assistant, what are the OCR texts in this receipt? /a/c0%5/XX99096.jpg
 
-EXAMPLE END
+
 """
 SUFFIX = """
 
+Human: Previous conversation history up to INPUT NEW
 {chat_history}
 
+INPUT NEW
 {input}
 {agent_scratchpad}"""

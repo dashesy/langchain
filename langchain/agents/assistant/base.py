@@ -35,7 +35,7 @@ class AssistantAgent(Agent):
 
     @property
     def _stop(self) -> List[str]:
-        return [f"\n{self.observation_prefix}", "\nHuman:", "\nEXAMPLE"]
+        return [f"\n{self.observation_prefix}", "\nHuman:", "\nEXAMPLE", "\nINPUT"]
 
     @classmethod
     def create_prompt(
