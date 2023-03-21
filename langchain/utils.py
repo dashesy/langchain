@@ -33,10 +33,11 @@ def download_image(url):
         return r.content
     except requests.exceptions.MissingSchema:
         # This should be configured because of security
-        ext = os.path.splitext(url)[1].lower()
-        if ext in [".jpg", ".png", ".bmp", ".jpeg"]:
-            with open(url, "rb") as fp:
-                return fp.read()
+        if os.environ.get("ALLOW_LOCAL_FILE_ACCESS") == "1":
+            ext = os.path.splitext(url)[1].lower()
+            if ext in [".jpg", ".png", ".bmp", ".jpeg"]:
+                with open(url, "rb") as fp:
+                    return fp.read()
         raise
 
 def im_downscale(data, target_size):
