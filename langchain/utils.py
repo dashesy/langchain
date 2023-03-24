@@ -1,6 +1,7 @@
 """Generic utility functions."""
 import os
-from typing import Any, Dict, Optional
+import re
+from typing import Any, Dict, Optional, Tuple
 import requests
 import io
 from PIL import Image
@@ -71,3 +72,18 @@ def im_upscale(data, target_size):
         im = im.convert("RGB")
     im.save(output, format="JPEG")
     return output.getvalue(), (w, h)
+
+def get_url_path(query:str)->Tuple[int,str]:
+    match = re.search(r"https?://.+\.(?:jpg|jpeg|png|bmp)", query, re.IGNORECASE)
+    if match:
+        return match.start(), match.group(0)
+    match = re.search(r"https?://\S+", query, re.IGNORECASE)
+    if match:
+        url = match.group(0)
+        if url.endswith((".", "?")):
+            url = url[:-1]
+        return match.start(), url
+    match = re.search(r"/[\w\d/]+\.(?:jpg|jpeg|png|bmp)", query, re.IGNORECASE)
+    if match:
+        return match.start(), match.group(0)
+    return -1, ""
