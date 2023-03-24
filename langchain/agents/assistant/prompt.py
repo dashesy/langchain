@@ -99,7 +99,7 @@ pills
 text
 prescription instructions
 
-{ai_prefix}: This image is likely a pill bottle with labels.
+{ai_prefix}: This image is likely a pill bottle with labels. It has text.
 {ai_prefix}: Assistant, what is the OCR texts in this image? /tmp/path/to/x_d_0(2).jpg
 Assistant: This is an image (1100 x 800)
 This image contains text
