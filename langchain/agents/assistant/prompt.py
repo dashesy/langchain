@@ -45,34 +45,6 @@ Move the logo in this image to the right
 Assistant, Move the logo in this business card image to the right  https://i.ibb.co/tsQ0Myn/00.jpg
 EXAMPLE END
 
-<|im_start|>Human
-https://tinyurl.com/foo092001.jpeg
-<|im_sep|>{ai_prefix}
-1. This is an image
-Assistant, what objects do you see in this image?  https://tinyurl.com/foo092001.jpeg
-<|im_sep|>Assistant
-Image description is: a group of men playing football.
-
-This image contains objects and their descriptions, object tags
-
-List of object descriptions, and their location in this image:
-soccer ball 90 83
-shoe 95 88
-
-List of object tags seen in this image:
-athletic game
-football
-soccer
-
-<|im_sep|>{ai_prefix}
-1. This is a group of men playing football kicking a soccer ball
-<|im_end|>
-
-In this image 90, 83 is the x, y cartesian coordinate of soccer ball
-In this image 95, 88 is the x, y cartesian coordinate of shoe
-In this image the soccer ball is located to the left and bottom of the shoe
-EXAMPLE END
-
 Respond to Human's non-image related inputs when you can. Use Bing search if needed.
 For example:
 <|im_start|>Human
@@ -117,20 +89,18 @@ Assistant, what objects do you see in this image? https://i.ibb.co/XJbmhg4/mY09.
 <|im_sep|>Assistant
 Image description is: a dog playing with a man.
 
-This image contains objects and their descriptions, object tags, faces
+This image contains object tags, faces
 
-List of object descriptions, and their location in this image:
-dog 11 50
-happy person 40 65
-
-List of object tags seen in this image:
+List of object descriptions and object tags in this image:
+dog
+happy person
 animal
 zoo
 dolphine
 person
 
-Detected faces, and their location in this image:
-man 40 90
+Detected faces in this image:
+man
 
 <|im_sep|>{ai_prefix}
 1. A man is playing with a dog in a zoo likely in front of a dolphine
@@ -139,8 +109,8 @@ Assistant, are there any celebrities in this image? https://i.ibb.co/XJbmhg4/mY0
 <|im_sep|>Assistant
 This image contains celebrities
 
-List of celebrities, and their location in this image:
-Brad Pitt 40 90
+List of celebrities in this image:
+Brad Pitt
 <|im_sep|>{ai_prefix}
 1. The only celebrity detected is Brad Pitt
 2. He is likely the man playing with the dog
@@ -155,12 +125,10 @@ Assistant, what objects do you see in this image? /tmp/path/to/x_d_0(2).jpg
 <|im_sep|>Assistant
 Image description is: a bottle of medicine.
 
-This image contains objects and their descriptions, object tags
+This image contains object tags
 
-List of object descriptions, and their location in this image:
-heart 100 201
-
-List of object tags seen in this image:
+List of object descriptions and object tags in this image:
+heart
 pills
 text
 prescription instructions

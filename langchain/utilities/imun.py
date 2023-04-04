@@ -15,8 +15,6 @@ from langchain.utils import get_from_dict_or_env, download_image, im_downscale, 
 
 IMUN_PROMPT_DESCRIPTION = "Image description is: {description}.\n"
 
-IMUN_PROMPT_CAPTIONS_PEFIX = " objects and their descriptions"
-
 IMUN_PROMPT_TAGS_PEFIX = " object tags"
 
 IMUN_PROMPT_OCR_PEFIX = " {style}text"
@@ -25,13 +23,8 @@ IMUN_PROMPT_FACES_PEFIX = " faces"
 
 IMUN_PROMPT_CELEB_PEFIX = " celebrities"
 
-IMUN_PROMPT_CAPTIONS = """
-List of object descriptions, and their locations in this image:
-{captions}
-"""
-
-IMUN_PROMPT_TAGS="""
-List of object tags seen in this image:
+IMUN_PROMPT_TAGS = """
+List of object descriptions and object tags in this image:
 {tags}
 """
 
@@ -51,12 +44,12 @@ The above texts are in this language:
 """
 
 IMUN_PROMPT_FACES="""
-Detected faces, and their location in this image:
+Detected faces in this image:
 {faces}
 """
 
 IMUN_PROMPT_CELEBS="""
-List of celebrities, and their location in this image:
+List of celebrities in this image:
 {celebs}
 """
 
@@ -222,26 +215,6 @@ def _handle_error(response):
         pass
     response.raise_for_status()
 
-def _cartesian_center(v:List[int], size=None) -> List[int]:
-    if size:
-        image_width, image_height = size["width"], size["height"]
-    else:
-        image_width = image_height = max(v)
-
-    width = v[2] - v[0]
-    height = v[3] - v[1]
-    # Use center of the box
-    x = v[0] + width // 2
-    y = v[1] + height // 2
-    y = image_height - v[1]
-    return [(100 * x) // image_width, (100 * y) // image_height]
-
-def _concat_objects(objects: List, size=None) -> str:
-    # normalize if size given, cartesian 
-    objects = [(n, _cartesian_center(v, size)) for (n, v) in objects]
-    objects = [f'{n} {v[0]} {v[1]}' for (n, v) in objects]
-    return "\n".join(objects)
-
 def intersection(o:List[float], c:List[float]) -> Tuple[float]:
     ox1, oy1, ox2, oy2 = o
     cx1, cy1, cx2, cy2 = c
@@ -264,26 +237,30 @@ def intersection(o:List[float], c:List[float]) -> Tuple[float]:
 
     return inter, o_area, c_area
 
-def _merge_objects(objects: List, captions: List) -> List:
+def _merge_objects(objects:List, captions:List) -> List:
     """Merge objects into captions
     If no overallping this would be equivalent to objects + captions
     """
+    objects = objects or []
+    captions = captions or []
     if not captions:
         return objects
+    
     new_objects = []
     for ob in objects:
         o = ob[1]
         max_ioa = 0
         for ca in captions:
             c = ca[1]
-            inter, o_area, c_area = intersection(o, c)
+            inter, _, c_area = intersection(o, c)
             ioa = inter / c_area
             if ioa > max_ioa:
                 max_ioa = ioa
         if max_ioa < 0.3:
             new_objects.append(ob)
+    objects = new_objects
 
-    return captions + new_objects
+    return captions + objects
 
 def create_prompt(results: Dict) -> str:
     """Create the final prompt output"""
@@ -300,12 +277,8 @@ def create_prompt(results: Dict) -> str:
     answer = IMUN_PROMPT_DESCRIPTION.format(description=description) if description else ""
 
     found = False
-    if captions or objects:
+    if captions or objects or tags:
         answer += "\nThis image contains"
-        answer += IMUN_PROMPT_CAPTIONS_PEFIX
-        found = True
-    if tags:
-        answer += "," if found else "\nThis image contains"
         answer += IMUN_PROMPT_TAGS_PEFIX
         found = True
     if words:
@@ -339,16 +312,15 @@ def create_prompt(results: Dict) -> str:
             answer += "This image is too blurry"
         return answer
     
-    size = results.get("size")
-    if objects and captions:
-        answer += IMUN_PROMPT_CAPTIONS.format(captions=_concat_objects(_merge_objects(objects, captions), size=size))
-    else:
-        if captions:
-            answer += IMUN_PROMPT_CAPTIONS.format(captions=_concat_objects(captions, size=size))
-        if objects:
-            answer += IMUN_PROMPT_CAPTIONS.format(captions=_concat_objects(objects, size=size))
-    if tags:
-        answer += IMUN_PROMPT_TAGS.format(tags="\n".join(tags))
+    if tags or objects or captions:
+        objects = _merge_objects(objects, captions)
+        objects = [f'{n}' for (n, _) in objects]
+        objects_set = set(objects)
+        for tag in tags:
+            if tag in objects_set:
+                continue
+            objects.append(tag)
+        answer += IMUN_PROMPT_TAGS.format(tags="\n".join(objects))
     if words:
         answer += IMUN_PROMPT_WORDS.format(words="\n".join(words))
         if languages:
@@ -358,9 +330,9 @@ def create_prompt(results: Dict) -> str:
             elif len(langs) > 1 or languages[0] != "en":
                 answer += IMUN_PROMPT_LANGUAGES.format(languages="\n".join(languages))
     if faces:
-        answer += IMUN_PROMPT_FACES.format(faces=_concat_objects(faces, size=size))
+        answer += IMUN_PROMPT_FACES.format(faces="\n".join(f'{n}' for (n, _) in faces))
     if celebrities:
-        answer += IMUN_PROMPT_CELEBS.format(celebs=_concat_objects(celebrities, size=size))
+        answer += IMUN_PROMPT_CELEBS.format(celebs="\n".join(f'{n}' for (n, _) in celebrities))
     return answer
 
 
@@ -508,7 +480,7 @@ class ImunAPIWrapper(BaseModel):
         )
 
         values["imun_url"] = imun_url
-        values["cache"] = {}
+        values["cache"] = values.get("cache") or {}
 
         params = get_from_dict_or_env(values, "params", "IMUN_PARAMS")
         if isinstance(params, str):
