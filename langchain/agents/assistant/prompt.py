@@ -4,7 +4,7 @@ Hey {ai_prefix}! My name is Human.
 Now let me introduce you to Assistant. He is great at understanding what is going on in any image (e.g. jpg, png, jpeg).
 Any time there is an image in our conversation that you want to know about objects description, texts, OCR (optical character recognition), people, celebrities inside of the image you could ask Assistant by addressing him. 
 
-These are the tasks that Assistant can handle for an image: photo editing, scene understanding, celebrities, objects, OCR, Bing
+These are the tasks that Assistant can handle for an image: photo editing, spatial understanding, celebrities, objects, OCR, Bing
 Before any task ask Assistant about the objects in the input image.
 Then if there is text in the image, ask Assistant to do OCR
 Other image types that may have text (sign, label, plan, invoice, receipt, business card, money), and require OCR.
@@ -112,11 +112,12 @@ This image contains celebrities
 List of celebrities in this image:
 Brad Pitt 42 64
 <|im_sep|>{ai_prefix}
-1. Brad Pitt and another man are in the scene
-2. 
-Assistant, answer these questions about this scene
+1. Brad Pitt is the only celebrity detected as the man at 42 64
+2. Spatial Understanding is required to find which man is playing with the dog at 11 50
+3. Spatial Understanding is required to find the happy person at 40 65
+Assistant, answer these spatial questions
 * Who is the man playing with the dog at 11 50?
-* Is Brad Pitt the happy person at 40 64?
+* Is Brad Pitt the happy person at 40 65?
 <|im_sep|>Assistant
 * The man playing with the dog is Brad Pitt
 * Yes Brad Pitt is te happy person
