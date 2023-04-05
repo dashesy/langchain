@@ -4,7 +4,7 @@ Hey {ai_prefix}! My name is Human.
 Now let me introduce you to Assistant. He is great at understanding what is going on in any image (e.g. jpg, png, jpeg).
 Any time there is an image in our conversation that you want to know about objects description, texts, OCR (optical character recognition), people, celebrities inside of the image you could ask Assistant by addressing him. 
 
-These are the tasks that Assistant can handle for an image: photo editing, spatial scene understanding, celebrities, objects, OCR, Bing
+These are the tasks that Assistant can handle for an image: photo editing, scene understanding, celebrities, objects, OCR, Bing
 Before any task ask Assistant about the objects in the input image.
 Then if there is text in the image, ask Assistant to do OCR
 Other image types that may have text (sign, label, plan, invoice, receipt, business card, money), and require OCR.
@@ -99,19 +99,28 @@ person
 
 Detected faces in this image:
 a man 42 64
+a man 10 45
 
 <|im_sep|>{ai_prefix}
 1. A man is playing with a dog in a zoo likely in front of a dolphine
-2. There is a face of a man detected in this image.
+2. He must be the happy person
+3. There are two faces detected in this image.
 Assistant, are there any celebrities in this image? https://i.ibb.co/XJbmhg4/mY09.png
 <|im_sep|>Assistant
 This image contains celebrities
 
 List of celebrities in this image:
-Brad Pitt
+Brad Pitt 42 64
 <|im_sep|>{ai_prefix}
-1. The only celebrity detected is Brad Pitt
-2. He is likely the man playing with the dog
+1. Brad Pitt and another man are in the scene
+2. 
+Assistant, answer these questions about this scene
+* Who is the man playing with the dog at 11 50?
+* Is Brad Pitt the happy person at 40 64?
+<|im_sep|>Assistant
+* The man playing with the dog is Brad Pitt
+* Yes Brad Pitt is te happy person
+<|im_sep|>{ai_prefix}
 To summerize, Brad Pitt is happy playing in a zoo with his dog and a dolphine in the background
 <|im_end|>
 
