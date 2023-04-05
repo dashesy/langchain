@@ -93,15 +93,15 @@ def _get_person(o):
     gender = (o.get("gender") or "").lower()
     if age < 20:
         if gender == "female":
-            return "young woman"
+            return "a young woman"
         if gender == "male":
-            return "young man"
+            return "a young man"
         return "young person"
     if gender == "female":
-        return "woman"
+        return "a woman"
     if gender == "male":
-        return "man"
-    return "person"
+        return "a man"
+    return "a person"
 
 def _is_handwritten(styles):
     handwritten = False
@@ -215,6 +215,20 @@ def _handle_error(response):
         pass
     response.raise_for_status()
 
+def _cartesian_center(v:List[int], size=None) -> List[int]:
+    if size:
+        image_width, image_height = size["width"], size["height"]
+    else:
+        image_width = image_height = max(v)
+
+    width = v[2] - v[0]
+    height = v[3] - v[1]
+    # Use center of the box
+    x = v[0] + width // 2
+    y = v[1] + height // 2
+    y = image_height - v[1]
+    return [(100 * x) // image_width, (100 * y) // image_height]
+
 def intersection(o:List[float], c:List[float]) -> Tuple[float]:
     ox1, oy1, ox2, oy2 = o
     cx1, cy1, cx2, cy2 = c
@@ -312,10 +326,13 @@ def create_prompt(results: Dict) -> str:
             answer += "This image is too blurry"
         return answer
     
+    size = results.get("size")
     if tags or objects or captions:
         objects = _merge_objects(objects, captions)
-        objects = [f'{n}' for (n, _) in objects]
-        objects_set = set(objects)
+        objects_set = [f'{n}' for (n, _) in objects]
+        objects_set = set(objects_set)
+        objects = [(n, _cartesian_center(v, size)) for (n, v) in objects]
+        objects = [f'{n} {v[0]} {v[1]}' for (n, v) in objects]
         for tag in tags:
             if tag in objects_set:
                 continue
@@ -330,9 +347,13 @@ def create_prompt(results: Dict) -> str:
             elif len(langs) > 1 or languages[0] != "en":
                 answer += IMUN_PROMPT_LANGUAGES.format(languages="\n".join(languages))
     if faces:
-        answer += IMUN_PROMPT_FACES.format(faces="\n".join(f'{n}' for (n, _) in faces))
+        faces = [(n, _cartesian_center(v, size)) for (n, v) in faces]
+        faces = [f'{n} {v[0]} {v[1]}' for (n, v) in faces]
+        answer += IMUN_PROMPT_FACES.format(faces="\n".join(faces))
     if celebrities:
-        answer += IMUN_PROMPT_CELEBS.format(celebs="\n".join(f'{n}' for (n, _) in celebrities))
+        celebrities = [(n, _cartesian_center(v, size)) for (n, v) in celebrities]
+        celebrities = [f'{n} {v[0]} {v[1]}' for (n, v) in celebrities]
+        answer += IMUN_PROMPT_CELEBS.format(celebs="\n".join(celebrities))
     return answer
 
 

@@ -100,7 +100,7 @@ dolphine
 person
 
 Detected faces in this image:
-man
+a man
 
 <|im_sep|>{ai_prefix}
 1. A man is playing with a dog in a zoo likely in front of a dolphine
