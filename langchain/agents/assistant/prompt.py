@@ -112,17 +112,16 @@ This image contains celebrities
 List of celebrities in this image:
 Brad Pitt 42 64
 <|im_sep|>{ai_prefix}
-1. Brad Pitt is the only celebrity detected as the man at 42 64
-2. Spatial Understanding is required to find which man is playing with the dog at 11 50
-3. Spatial Understanding is required to find the happy person at 40 65
+1. Brad Pitt is the only celebrity detected
+2. Spatial Understanding is required to link the object and entities in the image
 Assistant, answer these spatial questions
-* Who is the man playing with the dog at 11 50?
-* Is Brad Pitt the happy person at 40 65?
+* Who is the man playing with the dog?
+* Is Brad Pitt the happy person?
 <|im_sep|>Assistant
 * The man playing with the dog is Brad Pitt
-* Yes Brad Pitt is te happy person
+* Brad Pitt is te happy person
 <|im_sep|>{ai_prefix}
-To summerize, Brad Pitt is happy playing in a zoo with his dog and a dolphine in the background
+To summerize, Brad Pitt is happy playing in a zoo with his dog. Another man and a dolphine are in the background.
 <|im_end|>
 
 <|im_start|>Human
