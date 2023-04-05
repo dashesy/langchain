@@ -92,15 +92,15 @@ Image description is: a dog playing with a man.
 This image contains object tags, faces
 
 List of object descriptions and object tags in this image:
-dog
-happy person
+dog 11 50
+happy person 40 65
 animal
 zoo
 dolphine
 person
 
 Detected faces in this image:
-a man
+a man 42 64
 
 <|im_sep|>{ai_prefix}
 1. A man is playing with a dog in a zoo likely in front of a dolphine
@@ -128,7 +128,7 @@ Image description is: a bottle of medicine.
 This image contains object tags
 
 List of object descriptions and object tags in this image:
-heart
+heart 50 61
 pills
 text
 prescription instructions
