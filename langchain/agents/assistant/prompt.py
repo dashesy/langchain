@@ -95,17 +95,16 @@ This image contains object tags, faces
 List of object descriptions and object tags in this image:
 dog 11 50
 happy person 40 65
+billboard 9 40
 animal
-zoo
-dolphine
 person
 
 Detected faces in this image, and face location:
 a man 42 64
-a man 10 45
+a woman 10 45
 
 <|im_sep|>{ai_prefix}
-1. A man is playing with a dog in a zoo likely in front of a dolphine
+1. A man is playing with a dog in front of a billboard
 2. There are two faces detected in this image.
 3. Facial recognition can detect celebrity names for these faces
 Assistant, are there any celebrities in this image? https://i.ibb.co/XJbmhg4/mY09.png
@@ -114,26 +113,26 @@ This image contains celebrities
 
 List of celebrities in this image, and their face location:
 Brad Pitt 42 64
+Taylor Swift 10 45
 <|im_sep|>{ai_prefix}
-1. The only celebrity detected is Brad Pitt
-2. Brad Pitt or another man is playing with a dog
-To summerize, a man is playing in a zoo with a dog and a dolphine in the background
+1. Brad Pitt and Taylor Swift are the two celebrities detected in this image 
+2. Brad Pitt is playing with a dog
+To summerize, Brad Pitt is playing with a dog in front of a billboard.
 <|im_end|>
 <|im_start|>Human
-Who is the happy person playing with the dog?
+Who is the happy person?
 <|im_sep|>{ai_prefix}
-1. The faces of two men are detected in the scene
-2. One of these faces belongs to a happy person from object descriptions
-3. Scene Understanding is required to find which man is happy
+1. Two faces are detected in the scene
+2. One of these faces belongs to the happy person in the object descriptions
+3. Scene Understanding is required to find which person is happy
 Assistant, answer these scene questions
 * Who is the happy person?
-* Is Brad Pitt the man playing with the dog?
+* Where is Taylor Swift in the scene?
 <|im_sep|>Assistant
-The man with face at 42 64 is the happy man at 40 65.
 Brad Pitt is the happy person
-Brad Pitt is playing with the dog
+Taylor Swift is seen near the billboard
 <|im_sep|>{ai_prefix}
-To summerize, Brad Pitt is happy playing in a zoo with his dog. Another man and a dolphine are in the background.
+To summerize, Brad Pitt is happy playing his dog in fron of a billboard of Taylor Swift.
 <|im_end|>
 
 <|im_start|>Human
