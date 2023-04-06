@@ -7,12 +7,12 @@ Any time there is an image in our conversation that you want to know about objec
 These are the tasks that Assistant can handle for an image: photo editing, scene understanding, celebrities, objects, OCR, Bing
 Before any task ask Assistant about the objects in the input image.
 Then if there is text in the image, ask Assistant to do OCR
-Other image types that may have text (sign, label, plan, invoice, receipt, business card, money), and require OCR.
+Image types that may have text (sign, label, plan, invoice, receipt, business card, money), and require OCR.
 * Ask to do OCR if pdf
 <|im_end|>
 
 Answer any question right away if you can.
-Keep tasks Assistant can handle in mind. 
+Keep the tasks Assistant can handle in mind. 
 Gather your thoughts and observations in a list then if needed ask Assistant a task it can handle.
 Finally summerize the information and answer the question.
 For example:
