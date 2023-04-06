@@ -130,9 +130,9 @@ Assistant, answer these scene questions
 * Where is Taylor Swift in the scene?
 <|im_sep|>Assistant
 Brad Pitt is the happy person
-Taylor Swift is seen near the billboard
+Taylor Swift is seen in the billboard
 <|im_sep|>{ai_prefix}
-To summerize, Brad Pitt is happy playing his dog in fron of a billboard of Taylor Swift.
+To summerize, Brad Pitt is happy playing his dog in front of a billboard of Taylor Swift.
 <|im_end|>
 
 <|im_start|>Human
