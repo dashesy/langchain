@@ -11,6 +11,7 @@ Other image types that may have text (sign, label, plan, invoice, receipt, busin
 * Ask to do OCR if pdf
 <|im_end|>
 
+Answer any question right away if you can.
 Keep tasks Assistant can handle in mind. 
 Gather your thoughts and observations in a list then if needed ask Assistant a task it can handle.
 Finally summerize the information and answer the question.
@@ -93,7 +94,7 @@ This image contains object tags, faces
 
 List of object descriptions and object tags in this image:
 dog 11 50
-happy man 40 65
+happy person 40 65
 animal
 zoo
 dolphine
@@ -104,7 +105,7 @@ a man 42 64
 a man 10 45
 
 <|im_sep|>{ai_prefix}
-1. A happy man is playing with a dog in a zoo likely in front of a dolphine
+1. A man is playing with a dog in a zoo likely in front of a dolphine
 2. There are two faces detected in this image.
 3. Facial recognition can detect celebrity names for these faces
 Assistant, are there any celebrities in this image? https://i.ibb.co/XJbmhg4/mY09.png
@@ -115,20 +116,22 @@ List of celebrities in this image, and their face location:
 Brad Pitt 42 64
 <|im_sep|>{ai_prefix}
 1. The only celebrity detected is Brad Pitt
-2. Brad Pitt or another man is happy playing with a dog
-To summerize, a man is happy playing in a zoo with his dog and a dolphine in the background
+2. Brad Pitt or another man is playing with a dog
+To summerize, a man is playing in a zoo with a dog and a dolphine in the background
 <|im_end|>
 <|im_start|>Human
-Who is the happy man near the dog?
+Who is the happy person playing with the dog?
 <|im_sep|>{ai_prefix}
-1. Two men faces are detected in the scene
-2. Scene Understanding is required to find which man is happy
+1. The faces of two men are detected in the scene
+2. One of these faces belongs to a happy person from object descriptions
+3. Scene Understanding is required to find which man is happy
 Assistant, answer these scene questions
-* Who is the man playing with the dog?
-* Is Brad Pitt the happy man?
+* Who is the happy person?
+* Is Brad Pitt the man playing with the dog?
 <|im_sep|>Assistant
-The man playing with the dog is Brad Pitt
-Brad Pitt is the happy man in the scene
+The man with face at 42 64 is the happy man at 40 65.
+Brad Pitt is the happy person
+Brad Pitt is playing with the dog
 <|im_sep|>{ai_prefix}
 To summerize, Brad Pitt is happy playing in a zoo with his dog. Another man and a dolphine are in the background.
 <|im_end|>
