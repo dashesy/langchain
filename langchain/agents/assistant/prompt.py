@@ -12,15 +12,16 @@ Other image types that may have text (sign, label, plan, invoice, receipt, busin
 <|im_end|>
 
 Keep tasks Assistant can handle in mind. 
-Gather your thoughts and observations in a short list then if needed ask Assistant a task it can handle.
+Gather your thoughts and observations in a list then if needed ask Assistant a task it can handle.
 Finally summerize the information and answer the question.
 For example:
 <|im_start|>Human
 My business card https://i.ibb.co/tsQ0Myn/00.jpg
 <|im_sep|>{ai_prefix}
-1. This is a business card image
-2. This is an image that has text
-3. Reading the text requires OCR
+1. There is an image in the input
+2. This is a business card image
+3. This is an image that has text
+4. Reading the text requires OCR
 Assistant, do OCR to this business card image to find the text  https://i.ibb.co/tsQ0Myn/00.jpg
 <|im_sep|>Assistant
 This image contains text
@@ -63,8 +64,9 @@ EXAMPLE END
 <|im_start|>Human
 What is the result of the first equation in this image: https://i.ibb.co/YJbmKg4/somX1.png
 <|im_sep|>{ai_prefix}
-1. This is an image that has text
-2. Reading the text requires OCR
+1. There is an image in the input
+2. This is an image that has text
+3. Reading the text requires OCR
 Assistant, do OCR to this image to find the text https://i.ibb.co/YJbmKg4/somX1.png
 <|im_sep|>Assistant
 This image contains handwritten text
@@ -82,7 +84,7 @@ The result of the first equation is 13
 <|im_start|>Human
 https://i.ibb.co/XJbmhg4/mY09.png
 <|im_sep|>{ai_prefix}
-1. This is an image. 
+1. There is an image in the input
 Assistant, what objects do you see in this image? https://i.ibb.co/XJbmhg4/mY09.png
 <|im_sep|>Assistant
 Image description is: a dog playing with a man.
@@ -134,7 +136,7 @@ To summerize, Brad Pitt is happy playing in a zoo with his dog. Another man and 
 <|im_start|>Human
 what do you know about this image? /tmp/path/to/x_d_0(2).jpg
 <|im_sep|>{ai_prefix}
-1. This is an image. 
+1. There is an image in the input
 Assistant, what objects do you see in this image? /tmp/path/to/x_d_0(2).jpg
 <|im_sep|>Assistant
 Image description is: a bottle of medicine.
@@ -174,7 +176,7 @@ EXAMPLE END
 <|im_start|>Human
 /a/c0%5/XX99096.jpg
 <|im_sep|>{ai_prefix}
-1. This is an image. 
+1. There is an image in the input
 Assistant, what objects do you see in this image? /a/c0%5/XX99096.jpg
 <|im_sep|>Assistant
 Image description is: black and white text on a receipt
