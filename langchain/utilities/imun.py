@@ -44,12 +44,12 @@ The above texts are in this language:
 """
 
 IMUN_PROMPT_FACES="""
-Detected faces in this image:
+Detected faces in this image, and face location:
 {faces}
 """
 
 IMUN_PROMPT_CELEBS="""
-List of celebrities in this image:
+List of celebrities in this image, and their face location:
 {celebs}
 """
 

@@ -4,7 +4,7 @@ Hey {ai_prefix}! My name is Human.
 Now let me introduce you to Assistant. He is great at understanding what is going on in any image (e.g. jpg, png, jpeg).
 Any time there is an image in our conversation that you want to know about objects description, texts, OCR (optical character recognition), people, celebrities inside of the image you could ask Assistant by addressing him. 
 
-These are the tasks that Assistant can handle for an image: photo editing, spatial understanding, celebrities, objects, OCR, Bing
+These are the tasks that Assistant can handle for an image: photo editing, scene understanding, celebrities, objects, OCR, Bing
 Before any task ask Assistant about the objects in the input image.
 Then if there is text in the image, ask Assistant to do OCR
 Other image types that may have text (sign, label, plan, invoice, receipt, business card, money), and require OCR.
@@ -91,35 +91,42 @@ This image contains object tags, faces
 
 List of object descriptions and object tags in this image:
 dog 11 50
-happy person 40 65
+happy man 40 65
 animal
 zoo
 dolphine
 person
 
-Detected faces in this image:
+Detected faces in this image, and face location:
 a man 42 64
 a man 10 45
 
 <|im_sep|>{ai_prefix}
-1. A man is playing with a dog in a zoo likely in front of a dolphine
-2. He must be the happy person
-3. There are two faces detected in this image.
+1. A happy man is playing with a dog in a zoo likely in front of a dolphine
+2. There are two faces detected in this image.
+3. Facial recognition can detect celebrity names for these faces
 Assistant, are there any celebrities in this image? https://i.ibb.co/XJbmhg4/mY09.png
 <|im_sep|>Assistant
 This image contains celebrities
 
-List of celebrities in this image:
+List of celebrities in this image, and their face location:
 Brad Pitt 42 64
 <|im_sep|>{ai_prefix}
-1. Brad Pitt is the only celebrity detected
-2. Spatial Understanding is required to link the object and entities in the image
-Assistant, answer these spatial questions
+1. The only celebrity detected is Brad Pitt
+2. Brad Pitt or another man is happy playing with a dog
+To summerize, a man is happy playing in a zoo with his dog and a dolphine in the background
+<|im_end|>
+<|im_start|>Human
+Who is the happy man near the dog?
+<|im_sep|>{ai_prefix}
+1. Two men faces are detected in the scene
+2. Scene Understanding is required to find which man is happy
+Assistant, answer these scene questions
 * Who is the man playing with the dog?
-* Is Brad Pitt the happy person?
+* Is Brad Pitt the happy man?
 <|im_sep|>Assistant
-* The man playing with the dog is Brad Pitt
-* Brad Pitt is te happy person
+The man playing with the dog is Brad Pitt
+Brad Pitt is the happy man in the scene
 <|im_sep|>{ai_prefix}
 To summerize, Brad Pitt is happy playing in a zoo with his dog. Another man and a dolphine are in the background.
 <|im_end|>
