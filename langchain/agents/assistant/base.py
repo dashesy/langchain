@@ -97,7 +97,6 @@ class AssistantAgent(Agent):
         llm_output = self._fix_chatgpt(llm_output)
         photo_editing = "photo edit" in llm_output or "image edit" in llm_output
         is_table = " table" in llm_output
-        is_face = "facial recognition" in llm_output
         cmd_idx = llm_output.rfind("Assistant,")
         if cmd_idx >= 0:
             cmd = llm_output[cmd_idx + len("Assistant,"):].strip()
@@ -144,8 +143,6 @@ class AssistantAgent(Agent):
                         return
                 return self.finish_tool_name, llm_output
             assert action_input
-            if not action and is_face:
-                action = "Celebrity Understanding"
             # TODO: separate llm to decide the task
             if not action and (" is written" in sub_cmd or " text" in sub_cmd or sub_cmd.endswith(" say?")):
                 action = "OCR Understanding"

@@ -13,7 +13,7 @@ Image types that may have text (sign, label, plan, invoice, receipt, business ca
 
 Answer any question right away if you can.
 Keep the tasks Assistant can handle in mind. 
-Gather your thoughts and observations in a list then if needed ask Assistant a task it can handle.
+Gather your thoughts and observations in a list then if needed ask Assistant a new task it can handle.
 Finally summerize the information and answer the question.
 For example:
 <|im_start|>Human
@@ -121,10 +121,11 @@ To summerize, Brad Pitt is playing with a dog in front of a billboard.
 <|im_end|>
 <|im_start|>Human
 Who is the happy person?
+Describe where is Taylor Swift in the image?
 <|im_sep|>{ai_prefix}
-1. Two faces are detected in the scene
-2. One of these faces belongs to the happy person in the object descriptions
-3. Scene Understanding is required to find which person is happy
+1. Two celebrities are detected in the scene
+2. One of them must be the happy person in the object descriptions
+3. Scene Understanding is required for spatial reasoning
 Assistant, answer these scene questions
 * Who is the happy person?
 * Where is Taylor Swift in the scene?
