@@ -3,13 +3,13 @@ from langchain.prompts.prompt import PromptTemplate
 
 template = """<|im_start|>system
 Generate Python3 Code to answer a question about a scene as described by a dictionay named scene_dict.
-The scene is the result of API calls for an image to multiple vision tasks
-Vision tasks detect objects, captions, people, Optical Character Recognition (OCR)
+The scene is the result of multiple vision API tasks for an image
+Vision tasks detect objects, captions, people, celebrities and OCR words (Optical Character Recognition)
 
 Use box intersection to relate different entities by their location
 <|im_end|>
 
-Bounding boxes are in the form of [x1,y1,x2,y2]
+Bounding boxes are in the form of [x1,y1,x2,y2] for left,top,right,bottom
 
 'description' is the description of the scene
 'size' is the size of the image in pixels
@@ -28,26 +28,27 @@ scene_dict = {{
   'size': {{'height': 640, 'width': 810}},
   'objects': [
     ['person', [2, 7, 120, 170]],
-    ['tv screen', [2, 7, 120, 170]],
+    ['tv screen', [11, 100, 40, 110]],
   ],
   'faces': [
-    ['a man', [341, 31, 451, 129]],
-    ['a man', [1, 234, 160, 456]],
+    ['a man', [341, 110, 391, 128]],
+    ['a man', [1, 224, 40, 260]],
   ],
   'captions': [
-    ['a man cooking on a grill', [98, 32, 198, 431]],
-    ['a man playing with a dog', [127, 0, 246, 162]],
-    ['a german shepard dog jumping', [359, 162, 494, 325]],
+    ['a man cooking on a grill', [99, 32, 188, 541]],
+    ['a man playing with a dog', [120, 0, 246, 162]],
+    ['a german shepard dog jumping', [301, 134, 392, 600]],
   ],
   'celebrities': [
-    ['Brad Pitt', [341, 31, 451, 128]],
+    ['Brad Pitt', [341, 110, 391, 128]],
   ],
 }}
 # Question: what is Brad Pitt doing?
 <|im_sep|>AI
-# 1. A dog is playing in the backyard
-# 2. Two faces are detected
-# 3. One of the faces is recognized as Brad Pitt
+# 1. a man playing with a dog
+# 2. a man is cooking on a grill
+# 3. Two faces are detected
+# 4. Brad Pitt's face detected at [341, 110, 391, 128]
 
 def get_intersection(box_a, box_b):
   # get intersection of two boxes
@@ -61,41 +62,36 @@ def get_intersection(box_a, box_b):
   intersection = inter * (min_x2 - max_x1) * (min_y2 - max_y1)
   return intersection
 
-def best_match(boxes, box):
-  # find the best match for box among boxes
+# Find the best matches for Brad Pitt in the scene 
+best = {{}}
+for key in ['captions', 'faces', 'objects']:
   max_intersection = 0
-  matched_box = None
-  for name, box in boxes:
-    intersection = get_intersection(box, [341, 31, 451, 128])
+  for entity, entity_box in scene_dict[key]:
+    intersection = get_intersection(entity_box, [341, 110, 391, 128])
     if intersection > max_intersection:
-      matched_box = face_box
-  return matched_box
+      best[key] = entity
 
-# find which face belongs to Brad Pitt at [341, 31, 451, 128]
-faces = scene_dict['faces']
-max_intersection = 0
-matched_face_box = None
-for face, face_box in faces:
-  intersection = get_intersection(face_box, [341, 31, 451, 128])
-  if intersection > max_intersection:
-    matched_face_box = face_box
-
-if matched_face_box is None:
-  answer = "Did not find the answer"
-
-for key in ['faces']:
-  face_intersection = get_intersection
-
+# now go through the best matches
+# and depending on the type of entity add appropriate description to the answer
 def solution():
-  for box in 
-    
+  description = ""
+  for key, entity in best.items():
+    if key == "faces":
+      description += f"Brad Pitt matches with face of {{entity}}\n"
+    elif key == "captions":
+      description += f"Brad Pitt described with caption {{entity}}\n"
+    elif key == "objects":
+      description += f"Brad Pitt seen near object {{entity}}\n"
+  return description
+
+# the final answer is a string
 answer = solution()
 
 <|im_end|>
 
 <|im_start|>Human
 # The scene dictionary
-{scene}
+scene_dict = {scene}
 # Question: {question}
 <|im_sep|>AI
 """
