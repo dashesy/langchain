@@ -10,6 +10,7 @@ from pydantic import BaseModel, Extra
 
 from langchain.chains.base import Chain
 from langchain.chains.llm import LLMChain
+from langchain.chains.pal.spatial_understanding_prompt import SPATIAL_UNDERSTANDING_PROMPT
 from langchain.chains.pal.colored_object_prompt import COLORED_OBJECT_PROMPT
 from langchain.chains.pal.math_prompt import MATH_PROMPT
 from langchain.llms.base import BaseLLM
@@ -85,6 +86,17 @@ class PALChain(Chain, BaseModel):
             llm=llm,
             prompt=COLORED_OBJECT_PROMPT,
             stop="\n\n\n",
+            get_answer_expr="print(answer)",
+            **kwargs,
+        )
+
+    @classmethod
+    def from_spatial_understanding_prompt(cls, llm: BaseLLM, **kwargs: Any) -> PALChain:
+        """Load PAL from spatial understanding prompt."""
+        return cls(
+            llm=llm,
+            prompt=SPATIAL_UNDERSTANDING_PROMPT,
+            stop="<|im_end|>",
             get_answer_expr="print(answer)",
             **kwargs,
         )

@@ -444,11 +444,11 @@ class ImunAPIWrapper(BaseModel):
         if "tags" in api_results:
             results["tags"] = [o["name"] for o in api_results["tags"]]
         if "objects" in api_results:
-            results["objects"] = [(o.get("object") or o["name"], _get_box(o)) for o in api_results["objects"]]
+            results["objects"] = [[o.get("object") or o["name"], _get_box(o)] for o in api_results["objects"]]
         if "faces" in api_results:
-            results["faces"] = [(_get_person(o), _get_box(o)) for o in api_results["faces"]]
+            results["faces"] = [[_get_person(o), _get_box(o)] for o in api_results["faces"]]
         if "result" in api_results:
-            results["celebrities"] = [(o["name"], _get_box(o)) for o in api_results["result"]["celebrities"]]
+            results["celebrities"] = [[o["name"], _get_box(o)] for o in api_results["result"]["celebrities"]]
 
         if "denseCaptionsResult" in api_results:
             results["captions"] = []
@@ -457,7 +457,7 @@ class ImunAPIWrapper(BaseModel):
                     # fist one is the image description
                     results["description"] = o['text']
                     continue
-                results["captions"].append((o["text"], _get_box(o)))
+                results["captions"].append([o["text"], _get_box(o)])
         if "captionResult" in api_results:
             results["description"] = api_results["captionResult"]['text']
         if "tagsResult" in api_results:
